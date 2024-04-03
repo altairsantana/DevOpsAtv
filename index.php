@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Exibe o formulário
 ?>
     <h2>Cadastro</h2>
+    <p> echo "Cadastre-se aqui"</p>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <label for="nome">Nome:</label><br>
         <input type="text" id="nome" name="nome" required><br><br>
