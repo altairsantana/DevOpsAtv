@@ -11,7 +11,7 @@
 // Verifica se o mÃ©todo de requisiÃ§Ã£o Ã© POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ObtÃ©m os dados do formulÃ¡rio
-    $nome = $_POST["nome"];
+    $nome = $_POST["nome de usuario"];
     $email = $_POST["email"];
     $senha = $_POST["senha"];
     
@@ -45,6 +45,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 <?php
 }
+
+$servername = "127.0.0.1";
+$username = "user_localhost";
+$password = "123456";
+$dbname = "formulario";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Falha na conexão: " . $conn->connect_error);
+}else{
+    echo "OK";
+}
+
 ?>
 
 </body>
