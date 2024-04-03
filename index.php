@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Exibe o formulÃ¡rio
 ?>
     <h2>Cadastro</h2>
+    <p>Coloque suas credenciais aqui:</p>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <label for="nome">Nome:</label><br>
         <input type="text" id="nome" name="nome" required><br><br>
