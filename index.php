@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Configurações de conexão ao banco de dados
     $servername = "127.0.0.1"; // endereço do servidor
     $username = "user_%"; // nome do usuário do MySQL
-    $password = "vagrant"; // senha do usuário do MySQL
+    $password = "123456"; // senha do usuário do MySQL
     $dbname = "formulario"; // nome do banco de dados
     $tablename = "cadastro"; // nome da tabela
 
