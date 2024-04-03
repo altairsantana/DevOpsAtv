@@ -1,37 +1,43 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FormulÃ¡rio de Cadastro</title>
-</head>
-<body>
-
 <?php
-// Verifica se o mÃ©todo de requisiÃ§Ã£o Ã© POST
+// Verifica se o método de requisição é POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // ObtÃ©m os dados do formulÃ¡rio
-    $nome = $_POST["nome de usuario"];
+    // Obtém os dados do formulário
+    $nome = $_POST["nome"];
     $email = $_POST["email"];
     $senha = $_POST["senha"];
-    
-    // Abre ou cria o arquivo de texto
-    $arquivo = fopen("dados.txt", "a");
-        
-    // Escreve os dados no arquivo
-    fwrite($arquivo, "Nome: $nome - Email: $email - Senha: $senha" . PHP_EOL);
-    
-    // Fecha o arquivo
-    fclose($arquivo);
-    
-    // Exibe mensagem de sucesso
-    echo "<h2>Cadastro realizado com sucesso!</h2>";
-    echo "<p>Obrigado por se cadastrar.</p>";
+
+    // Configurações de conexão ao banco de dados
+    $servername = "127.0.0.1"; // endereço do servidor
+    $username = "user_%"; // nome do usuário do MySQL
+    $password = "vagrant"; // senha do usuário do MySQL
+    $dbname = "formulario"; // nome do banco de dados
+    $tablename = "cadastro"; // nome da tabela
+
+    // Cria a conexão
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Verifica a conexão
+    if ($conn->connect_error) {
+        die("Falha na conexão: " . $conn->connect_error);
+    }
+
+    // Prepara a consulta SQL para inserir os dados
+    $sql = "INSERT INTO $tablename (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
+
+    // Executa a consulta
+    if ($conn->query($sql) === TRUE) {
+        echo "<h2>Cadastro realizado com sucesso!</h2>";
+        echo "<p>Obrigado por se cadastrar.</p>";
+    } else {
+        echo "Erro ao cadastrar: " . $conn->error;
+    }
+
+    // Fecha a conexão
+    $conn->close();
 } else {
-    // Exibe o formulÃ¡rio
+    // Exibe o formulário
 ?>
     <h2>Cadastro</h2>
-    <p>Coloque suas credenciais aqui:</p>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <label for="nome">Nome:</label><br>
         <input type="text" id="nome" name="nome" required><br><br>
@@ -46,21 +52,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 <?php
 }
-
-$servername = "127.0.0.1";
-$username = "user_localhost";
-$password = "123456";
-$dbname = "formulario";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}else{
-    echo "OK";
-}
-
 ?>
-
-</body>
-</html>
